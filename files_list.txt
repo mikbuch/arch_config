@@ -1,0 +1,2 @@
+brightness.sh
+colors.sh
