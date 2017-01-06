@@ -35,9 +35,9 @@ PS1='[\[$blue\]\u\[$reset\] \W]$ '
 #fi
 
 # COMMANDS ALIASES
-config_dir='/home/cereberus/.config/cereberus/arch'
-alias b='$config_dir/brightness.sh'
-alias c='$config_dir/colors.sh'
+config_dir='/home/cereberus/.config/cereberus_arch'
+alias b='bash $config_dir/brightness.sh'
+alias c='bash $config_dir/colors.sh'
 alias e='evince'
 alias i='firefox -new-window'
 alias iq='firefox -new-window --private'
