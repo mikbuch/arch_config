@@ -1,8 +1,0 @@
-bashrc
-bash_profile
-brightness.sh
-colors.sh
-tmux.conf
-xinitrc
-Xresources
-vimrc
