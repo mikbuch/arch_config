@@ -1,13 +1,35 @@
-#!/bin/bash
+#!/bin/bash -e
 
-config_domain="https://raw.githubusercontent.com/mikbuch/arch_config/minimal_config/master"
+config_domain="https://raw.githubusercontent.com/mikbuch/arch_config/master/minimal_config"
 
-curl -s -o ~/.bashrc $config_domain/.bashrc
-source ~/.bashrc
 
-curl -s -o ~/.config/openbox/rc.xml $config_domain/rc.xml
-# Arch has "rc.xml", debian "lxde-rc.xml"
-cp ~/.config/openbox/rc.xml ~/.config/openbox/lxde-rc.xml
-openbox --reconfigure
+if [ type curl &> /dev/null ]; then
 
-curl -s -o ~/.vimrc $config_domain/.vimrc
+    ### CURL SECTION ###
+    # Arch-default
+    echo "### Attempting CURL ###"
+    curl -s -o ~/.bashrc "$config_domain/.bashrc"
+    source ~/.bashrc
+
+    curl -s -o ~/.config/openbox/rc.xml "$config_domain/rc.xml"
+    openbox --reconfigure
+
+    curl -s -o ~/.vimrc "$config_domain/.vimrc"
+
+else
+
+    ### WGET SECTION ###
+    # Debian-default
+    echo "### Attempting WGET ###"
+    wget -O ~/.bashrc "$config_domain/.bashrc"
+    source ~/.bashrc
+
+    wget -O ~/.config/openbox/lxde-rc.xml "$config_domain/rc.xml"
+    openbox --reconfigure
+
+    wget -O ~/.vimrc "$config_domain/.vimrc"
+
+fi
+
+
+echo "EOF"
