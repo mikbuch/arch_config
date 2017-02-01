@@ -62,7 +62,7 @@ fi
 cd $CONFIG_PATH
 
 
-config_domain="https://raw.githubusercontent.com/mikbuch/arch_config/master"
+config_domain="https://raw.githubusercontent.com/mikbuch/arch_config/full_install/master"
 fileslist=$(curl -s $config_domain/files_list.txt)
 printf "\nList of configuration files: \n$fileslist\n\n"
 
