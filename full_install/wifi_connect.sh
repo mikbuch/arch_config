@@ -6,20 +6,23 @@ if [ "$EUID" -ne 0 ]; then
     exit 0
 fi
 
+# Define the device (wireless card).
 device="wlp1s0"
 
-ip link set $device up
+# ip link set $device up
 
-# printf "\nSearching for the networks ..."
+# Seach for networks nearby.
+printf "\nSearching for the networks ..."
 networks_available=$(iw wlp1s0 scan | grep SSID | sed -e "s/^[ \t]*SSID: //")
-# printf " networks available:\n"
-# printf "%s " ${networks_available}
-# printf "\n"
+printf " networks available:\n"
+printf "%s " ${networks_available}
+printf "\n"
 
+# Browse remembered interfaces.
 interfaces_saved=$(ls -1 /etc/netctl | grep $device | sed -r s/$device-//)
-# printf "\nInterfaces remembered in directory /etc/netctl\n"
-# printf "%s " ${interfaces_saved}
-# printf "\n"
+printf "\nInterfaces remembered in the directory /etc/netctl\n"
+printf "%s " ${interfaces_saved}
+printf "\n\n"
 
 init_wd=$(pwd)
 network_matched="false"
@@ -32,15 +35,14 @@ do
     do
         if [ $avail = $remem ]; then
             network_matched="true"
-            # printf " network === $avail === matched! \n"
+            printf "    network === $avail === matched! \n\n"
             cd /etc/netctl
-            # printf "Connecting ...\n\n"
-            # printf "netctl start $device-$avail\n"
-            echo "netctl start $device-$avail"
+            printf "Connecting ...\n\n"
+            printf "netctl start $device-$avail\n"
             # netctl start $device-$avail
-            # printf "\n... succesfully connected.\n"
-            # printf "\nExiting the program ... \n\n"
-            # printf ""
+            printf "\n... succesfully connected.\n"
+            printf "\nExiting the program ... \n\n"
+            printf ""
             break
         fi
     done
